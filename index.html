@@ -1,9 +1,11 @@
 <html>
+
 <head>
+
 </head>
 <body>
 	<video id="video" preload muted controls="" >
-		<source id="normal" src="exterior1.MP4" type="video/mp4">
+		<source id="normal" src="exterior1.mp4" type="video/mp4">
 	</video>
 	<video id="video-reverse" preload autoplay muted controls style="display: none;">
 		<source id="reverse" src="exteriorrev.mp4" type="video/mp4" style="display: none;">
@@ -16,16 +18,14 @@
 
 		var video = document.getElementById("video")
 		var video_reverse = document.getElementById("video-reverse")
-		video_reverse.controls =false
-		video.controls =false
+
 		var btn_right = document.getElementById("btn-right") 
 		var btn_left = document.getElementById("btn-left")
 
 		btn_right.addEventListener("click", function(){playVideo()})
 		btn_left.addEventListener("click", function(){rewind()})
 
-		function playVideo() {
-			removeControls()
+		function playVideo() {	
 			video_reverse.style.display = "none"
 			video.style.display = "block"
 			video.playbackRate = 1.0
@@ -33,9 +33,7 @@
 		}
         
 		function rewind() {
-			console.log("rewind")
-			removeControls()
-			video.style.display = "none";
+			video.style.display = "none"
 			video_reverse.style.display = "block"
 			video_reverse.playbackRate = 1.0
   			video_reverse.play()
