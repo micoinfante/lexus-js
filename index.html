@@ -1,0 +1,111 @@
+<html>
+<head>
+</head>
+<body>
+	<video id="video" preload muted controls="" >
+		<source id="normal" src="exterior1.mp4" type="video/mp4">
+	</video>
+	<video id="video-reverse" preload autoplay muted controls style="display: none;">
+		<source id="reverse" src="exteriorrev.mp4" type="video/mp4" style="display: none;">
+	</video>
+
+	<button id="btn-left" ><</button>
+	<button id="btn-right" >></button>
+	
+		<script type='text/javascript'>
+
+		var video = document.getElementById("video")
+		var video_reverse = document.getElementById("video-reverse")
+		video_reverse.controls =false
+		video.controls =false
+		var btn_right = document.getElementById("btn-right") 
+		var btn_left = document.getElementById("btn-left")
+
+		btn_right.addEventListener("click", function(){playVideo()})
+		btn_left.addEventListener("click", function(){rewind()})
+
+		function playVideo() {
+			removeControls()
+			video_reverse.style.display = "none"
+			video.style.display = "block"
+			video.playbackRate = 1.0
+			video.play()
+		}
+        
+		function rewind() {
+			console.log("rewind")
+			removeControls()
+			video.style.display = "none";
+			video_reverse.style.display = "block"
+			video_reverse.playbackRate = 1.0
+  			video_reverse.play()
+		}
+
+		// call a function everytime the video plays
+		video.ontimeupdate = function() {forward()}
+		video_reverse.ontimeupdate = function() {backward()}
+
+		//Stop points values
+		var forwardPoints = [6.65,1,2.5 ,4,5,6.65] // normal/right video
+		var backwardPoints = [6.65,1.44447,2.55557 ,4.166667,5.66667,6.65] // backward/right video
+
+		// key value pair of normal video and reverse video
+		// var vals = [ {x:1, y:5.66667}, {x:2.5, y:4.166667}, {x:4, y:2.55557}, {x:5, y:1.66667}]
+
+        var forwardIndex = 1
+        var backwardIndex = 1
+
+        var forwardCurrentStopTime = forwardPoints[forwardIndex]
+        var backwardCurrentStopTime = backwardPoints[backwardIndex]
+
+		function forward() {
+			if (forwardIndex >= 5) {
+				forwardIndex = 1
+			}
+
+			if (video.currentTime >= forwardCurrentStopTime) {
+        		video.pause()
+
+       			 if (forwardPoints.length > ++forwardIndex) {      	 
+         	     forwardCurrentStopTime = forwardPoints[forwardIndex]
+       		 }	else {                         
+          			  
+       			 }
+  			  }
+		}
+
+		function backward() {
+			if (backwardIndex >=5 ) {
+				backwardIndex = 1
+			}
+			if (video_reverse.currentTime >= backwardCurrentStopTime) {
+				  video_reverse.pause()
+				  // index = 
+        		if (backwardPoints.length > ++backwardIndex ) { 
+           	      backwardCurrentStopTime = backwardPoints[backwardIndex]
+       			 }
+       			
+       		 }	else {                               
+
+  			  }
+		}
+
+		//to remove controls options (play, pause, seek) in video player
+		function removeControls () {
+		    if (video.hasAttribute("controls")) {
+		     video.removeAttribute("controls")   
+		  } else {
+		     video.setAttribute("controls","controls")   
+		  }
+		  	if (video_reverse.hasAttribute("controls")) {
+		     video_reverse.removeAttribute("controls")   
+		  } else {
+		     video_reverse.setAttribute("controls","controls")   
+		  }
+		}
+
+	</script>
+
+</body>
+
+</html>
