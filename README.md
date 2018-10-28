@@ -1,9 +1,8 @@
 # lexus-js
 video animate
-VIEW AS RAW FILE
 
 
-#if there are bugs or errors when playing the animation :
+# if there are bugs or errors when playing the animation :
   * for chrome/chromium users: disable hardware accelaration
       *open chrome://flags -> search for "Hardware-accelerated video decode" -> restart browser
       
