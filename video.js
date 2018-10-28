@@ -1,10 +1,13 @@
 		(function (document) { 
+		// selectors
 		var video = document.getElementById("video"); //right video
 		var reverseVideo = document.getElementById("video-reverse");
 		var prev = document.getElementById("back");
 		var next = document.getElementById("next");
 		var index = 0;
 		var length = 5;
+
+		// cue points
 		var stopPoint = [6.65, 1, 2.5, 4, 5, 6.65];
 		var reverseStopPoint = [6.65, 5.66667, 4.166667, 2.66667, 1.66667, 6.65];
 		// var stopPoint = [18.63, 4, 8, 13.00, 18.08, 18.63];
@@ -20,6 +23,8 @@
 
 		function prevAction() {
 			var t = 0;
+			// -check if current index = 0, if yes play from begining
+			// - if not get the starting point from reversePoints using the index - 1
 			if (index === 0) {
 				t = length - 1;
 			} else {
@@ -27,6 +32,9 @@
 			}
 			playAnimation(t, false);
 		}
+
+		// -check if current index = 0, if yes play from begining
+		// - if not get the starting point from reversePoints using the index + 1
 
 		function nextAction() {
 			var t = 0;
@@ -41,11 +49,13 @@
 		function playAnimation(t) {
 			var cue = t;
 			console.log(arguments.length);
+
+			// check if the video is still playing
 			status = !(arguments.length > 1 && void 0 !== arguments[1]) || arguments[1];
 
+			// if the video is paused/ not playing
 			if (!playing) {
-				
-				currentStopPoint = status ? stopPoint[t] : reverseStopPoint[t];
+
 				if(status) {
 					video.style.display = "block";
 					reverseVideo.style.display = "none";
@@ -58,6 +68,7 @@
 					currentStopPoint = reverseStopPoint[t];
 					player = reverseVideo;
 				}
+
 				player.play();
 				clearInterval(timer);
 				timer = setInterval(function() {
