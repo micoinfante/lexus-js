@@ -8,12 +8,12 @@ video animation
       
   * add these headers in .php 
       <?php
-      header('Accept-Ranges: bytes');
-      header('Cache-Control: no-cache');
-      header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-      header("Cache-Control: post-check=0, pre-check=0", false);
+      #header('Accept-Ranges: bytes');
+      #header('Cache-Control: no-cache');
+      #header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+      #header("Cache-Control: post-check=0, pre-check=0", false);
       ?>
   * add this in .htaccess
-      <IfModule mod_headers.c> 
-      Header set Accept-Ranges bytes 
-      </IfModule> 
+      #<IfModule mod_headers.c> 
+      #Header set Accept-Ranges bytes 
+      #</IfModule> 
