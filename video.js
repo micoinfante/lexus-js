@@ -50,7 +50,8 @@
 			var cue = t;
 			console.log(arguments.length);
 
-			// check if the video is still playing
+			// argument[0] cue time. tells where to stop
+			//argument[1]selector for which video to play
 			status = !(arguments.length > 1 && void 0 !== arguments[1]) || arguments[1];
 
 			// if the video is paused/ not playing
@@ -71,12 +72,14 @@
 
 				player.play();
 				clearInterval(timer);
+
+				// check the value of currenttime every 30ms
+				// if the currentTime is greater than the currentStopPoint the video will pause
 				timer = setInterval(function() {
 					if(player.currentTime >= currentStopPoint) {
 						player.pause();
 						videoSetTime(cue);
 						videoReverseSetTime(cue);
-	               
 	                clearInterval(timer);
 	                playing = false;
 					}
@@ -85,9 +88,10 @@
 			}
 		}
 
+
 	function videoSetTime(t) {
-		var t = t;
 		if(0 === t ) {
+			//resets the video
 			video.currentTime = 0;
 		} else {
 			video.currentTime = stopPoint[t];
