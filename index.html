@@ -20,125 +20,42 @@ video::-webkit-media-controls {
 video::-webkit-media-controls-enclosure {
   display:none !important;
 }
+video::-webkit-media-controls-panel {
+ display:none !important;
+}
 	</style>
-
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="">
 		<div class="">
-			<video id="video" preload muted controls="" playsinline autostart="false">
-				<source id="normal" src="exterior-360_sp.mp4" type="video/mp4">
+			<video id="video" class="video" autobuffer="true" preload muted playsinline>
+				<source id="normal" src="exterior1.mp4" type="video/mp4">
 			</video>
-			<video id="video-reverse" preload muted controls="" playsinline style="display:none;">
-				<source id="reverse" src="exterior-360_rev.mp4" type="video/mp4" style="display: none;">
+			<video id="video-reverse" autobuffer="true" class="video-reverse" preload muted playsinline style="display:none;">
+				<source id="reverse" src="exteriorrev.mp4" type="video/mp4" style="display: none;">
 			</video>
-		<button id="back" class="arrow-prev">&laquo; Previous</button>
-		<button id="next" class="arrow-next" >Next &raquo;</button>
+		<button id="back" class="arrow-prev btn-prev">&laquo; Previous</button>
+		<button id="next" class="arrow-next btn-next" >Next &raquo;</button>
 		</div>
 
 	</div>
-	<script type='text/javascript'>
-		  document.addEventListener("DOMContentLoaded", function(event) {
-		    console.log("DOM fully loaded and parsed");
-
-		  });
-		var video = document.getElementById("video");
-		var video_reverse = document.getElementById("video-reverse");
-
-		var next = document.getElementById("next");
-		var back = document.getElementById("back");
-
-		next.addEventListener("click", playNext);
-		back.addEventListener("click", playPrev);
-
-		var video_points = [{point: 18.63, status: false},
-									{point: 4.33, status: true},
-									{point: 7.96, status: true},
-									{point: 13.00, status: true},
-									{point: 18.03, status: true},
-									{point: 18.63, status: true},
-									];
-		var video_reverse_points = [{point: 18.63, status: false},
-									{point:  5.26, status: true},
-									{point: 10.06, status: true},
-									{point: 13.83, status: true},
-									{point: 18.33, status: true},
-									{point: 18.63, status: true},
-									];
-
-		function playNext() {
-			back.style.display = "none";
-			video_reverse.style.display = "none";
-
-			next.style.display = "block";
-			video.style.display = "block";
-			video.play();
-		}
-
-		function playPrev() {
-			back.style.display = "block";
-			video_reverse.style.display = "block";
-
-			next.style.display = "none";
-			video.style.display = "none";
-			video_reverse.play();
-		}
-
-
-		video.addEventListener("timeupdate", function() {
-			for (var i = 1; i < video_points.length; i++) {
-				if ((video.currentTime >= video_points[i].point) && (video_points[i].status)) {
-					video.pause();
-					video_points[i].status = false;
-				}
-
-			}
-		}, false);
-
-		video_reverse.addEventListener("timeupdate", function() {
-			for (var i = 1; i < video_reverse_points.length; i++) {
-				console.log("asd");
-				if ((video_reverse.currentTime >= video_reverse_points[i].point) && (video_reverse_points[i].status)) {
-					video_reverse.pause();
-					video_reverse_points[i].status = false;
-				}
-
-			}
-		}, false);
-
-		video.onended = function() {
-			reset()
-		};
-
-		video_reverse.onended = function() {
-			reset()
-		};
-
-		function reset() {
-			video_points = [{point: 18.63, status: false},
-							{point: 4.33, status: true},
-							{point: 7.96, status: true},
-							{point: 13.00, status: true},
-							{point: 18.03, status: true},
-							{point: 18.63, status: true},
-							];
-
-			video_reverse_points = [{point: 18.63, status: false},
-									{point: 4.33, status: true},
-									{point: 7.96, status: true},
-									{point: 13.00, status: true},
-									{point: 18.03, status: true},
-									{point: 18.63, status: true},
-									];
-
-			back.style.display = "block";
-			// video_reverse.style.display = "none";
-
-			next.style.display = "block";
-			// video.style.display = "block";	
-		}
-	</script>
+	<script type='text/javascript' src="video.js"></script>
 
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
